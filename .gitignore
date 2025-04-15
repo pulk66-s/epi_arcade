@@ -1,0 +1,10 @@
+# Hidden Files
+.vscode
+.idea
+.env
+
+# Custom Folders
+Ideas
+
+# Binaries
+Arcatek
