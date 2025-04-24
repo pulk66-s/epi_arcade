@@ -18,4 +18,4 @@ fclean: clean
 re: fclean all
 
 run:
-	valgrind ./$(NAME) -g $(PACMAN_SO) -d $(SDL2_SO)
+	./$(NAME) -g $(PACMAN_SO) -d $(SDL2_SO)

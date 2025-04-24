@@ -6,7 +6,5 @@
 
 namespace ArcaTek::Event::Subject {
     class KeyboardSubject : public ASubject<uint8_t> {
-    public:
-        KeyboardSubject();
     };
 } // namespace ArcaTek::Event::Subject

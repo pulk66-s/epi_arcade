@@ -15,13 +15,14 @@ namespace ArcaTek {
         class IObserver;
         template <typename T>
         class AObserver;
-        class GameEventManager;
-        class DisplayEventManager;
+        struct GameEventManager;
+        struct DisplayEventManager;
         namespace Subject {
             class KeyboardSubject;
             class CloseAppSubject;
         } // namespace Subject
         namespace Observer {
+            class CloseAppObserver;
             class KeyboardObserver;
             class MouseObserver;
             class GamepadObserver;

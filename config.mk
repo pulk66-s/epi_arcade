@@ -1,7 +1,7 @@
 ABS_PATH		:= $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 CXX			:=	g++
-CXXFLAGS	:=	-g3 -W -Wall -Wextra -std=c++23 -I$(ABS_PATH)
+CXXFLAGS	:=	-W -Wall -Wextra -std=c++23 -I$(ABS_PATH)
 
 BIN_FOLDER		:=	$(ABS_PATH)/Bin
 

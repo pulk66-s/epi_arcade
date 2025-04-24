@@ -20,6 +20,9 @@ class ArcaTek::Core {
         std::size_t currentDisplayIndex = 0;
         Event::GameEventManager gameEventManager;
         Event::DisplayEventManager displayEventManager;
+        bool running = true;
+
+        void setupHandlers();
 
     public:
         Core(std::vector<std::string> gameDlls, std::vector<std::string> displayDlls);

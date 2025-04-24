@@ -1,5 +1,6 @@
 #include "Core.hpp"
 #include "Core/DLL/LDDLL.hpp"
+#include "Core/Event/Observer/CloseAppObserver.hpp"
 #include <iostream>
 
 namespace ArcaTek {
@@ -46,13 +47,22 @@ namespace ArcaTek {
             return;
         }
         this->gameInstances[this->currentGameIndex]->init(this->gameEventManager);
-        this->displayInstances[this->currentDisplayIndex]->init();
+        this->displayInstances[this->currentDisplayIndex]->init(this->displayEventManager);
+        this->setupHandlers();
+    }
+
+    void Core::setupHandlers() {
+        this->displayEventManager.closeApp->attach([this](bool close) {
+            if (close) {
+                this->running = false;
+            }
+        });
     }
 
     Core::~Core() {}
 
     void Core::run() {
-        while (true) {
+        while (this->running) {
             Buffer::DisplayBuffer buffer = this->gameInstances[this->currentGameIndex]->update();
 
             this->displayInstances[this->currentDisplayIndex]->render(buffer);

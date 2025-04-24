@@ -5,11 +5,7 @@
 #include <memory>
 
 namespace ArcaTek::Event {
-    class GameEventManager {
-    private:
-        std::shared_ptr<Subject::KeyboardSubject> keyboardSubject = std::make_shared<Subject::KeyboardSubject>();
-
-    public:
-        std::shared_ptr<Subject::KeyboardSubject> keyboard() const;
+    struct GameEventManager {
+        std::shared_ptr<Subject::KeyboardSubject> keyboard = std::make_shared<Subject::KeyboardSubject>();
     };
 } // namespace ArcaTek::Event

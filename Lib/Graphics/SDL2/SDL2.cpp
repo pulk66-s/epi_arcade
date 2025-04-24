@@ -11,7 +11,8 @@ SDL2::~SDL2() {
     SDL_Quit();
 }
 
-void SDL2::init() {
+void SDL2::init(ArcaTek::Event::DisplayEventManager &eventManager) {
+    this->eventManager = std::make_unique<ArcaTek::Event::DisplayEventManager>(eventManager);
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
         return;
@@ -31,6 +32,13 @@ void SDL2::init() {
 }
 
 void SDL2::render(ArcaTek::Buffer::DisplayBuffer &buffer) {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            this->eventManager->closeApp->notify(true);
+        }
+    }
+
     SDL_RenderClear(renderer);
 
     std::vector<std::shared_ptr<ArcaTek::Buffer::IDrawable>> drawables = buffer.getDrawables();
@@ -40,7 +48,6 @@ void SDL2::render(ArcaTek::Buffer::DisplayBuffer &buffer) {
             std::shared_ptr<ArcaTek::Buffer::Square> square = std::dynamic_pointer_cast<ArcaTek::Buffer::Square>(drawable);
 
             SDL_Rect rect = {square->pos.x, square->pos.y, square->size.x, square->size.y};
-            SDL_SetRenderDrawColor(renderer, square->color.r, square->color.g, square->color.b, 255);
             SDL_RenderFillRect(renderer, &rect);
         }
     }
