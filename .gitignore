@@ -8,3 +8,5 @@ Ideas
 
 # Binaries
 Arcatek
+*.o
+*.so

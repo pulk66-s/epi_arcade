@@ -1,34 +1,21 @@
-## Arcatek Makefile
+include config.mk
 
-# DEFINES
-CFLAGS = -Wall -Wextra -std=c++20
-
-TARGET = Arcatek
-
-CORE_FOLDER = ./Core
-
-SRC = $(CORE_FOLDER)/Core.cpp
-OBJ = $(SRC:.cpp=.o)
-
-# RULES
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	@echo "Linking..."
-	@$(CXX) -o $@ $^ $(LDFLAGS)
-	@echo "Done."
+all:
+	make -C Core/ all
+	make -C Lib/Games/ all
+	make -C Lib/Graphics/ all
 
 clean:
-	@echo "Cleaning..."
-	@rm -f $(OBJ)
-	@rm -f $(TARGET)
-	@echo "Done."
+	make -C Core/ clean
+	make -C Lib/Games/ clean
+	make -C Lib/Graphics/ clean
 
-re:
-	@echo "Rebuilding..."
-	@make clean
-	@make all
-	@echo "Done."
+fclean: clean
+	make -C Core/ fclean
+	make -C Lib/Games/ fclean
+	make -C Lib/Graphics/ fclean
 
-tests:
-	@echo "Work in progres.."
+re: fclean all
+
+run:
+	valgrind ./$(NAME) -g $(PACMAN_SO) -d $(SDL2_SO)
