@@ -1,6 +1,6 @@
 include ../../../config.mk
 
-SRC		:= Pacman.cpp
+SRC		:=	Pacman.cpp
 OBJ		:= $(SRC:.cpp=.o)
 NAME	:= $(PACMAN_SO)
 

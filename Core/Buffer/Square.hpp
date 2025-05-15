@@ -4,6 +4,7 @@
 #include "Core/Buffer/IDrawable.hpp"
 #include "Core/Buffer/Vec2.hpp"
 #include "Core/Buffer/Color.hpp"
+#include <iostream>
 
 namespace ArcaTek::Buffer {
     class Square : public IDrawable {
@@ -16,5 +17,9 @@ namespace ArcaTek::Buffer {
             : pos(pos), size(size), color(color) {}
 
         ~Square() override = default;
+
+        DrawableType getType() override {
+            return DrawableType::Square;
+        }
     };
 } // namespace ArcaTek::Buffer

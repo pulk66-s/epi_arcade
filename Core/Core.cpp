@@ -46,13 +46,15 @@ namespace ArcaTek {
             std::cerr << "No display instances loaded." << std::endl;
             return;
         }
-        this->gameInstances[this->currentGameIndex]->init(this->gameEventManager);
-        this->displayInstances[this->currentDisplayIndex]->init(this->displayEventManager);
+        this->gameEventManager = std::make_shared<Event::GameEventManager>();
+        this->displayEventManager = std::make_shared<Event::DisplayEventManager>();
+        this->gameInstances[this->currentGameIndex]->init(this->gameEventManager, this->displayEventManager);
+        this->displayInstances[this->currentDisplayIndex]->init(this->gameEventManager, this->displayEventManager);
         this->setupHandlers();
     }
 
     void Core::setupHandlers() {
-        this->displayEventManager.closeApp->attach([this](bool close) {
+        this->gameEventManager->closeApp->attach([this](bool close) {
             if (close) {
                 this->running = false;
             }
@@ -63,9 +65,9 @@ namespace ArcaTek {
 
     void Core::run() {
         while (this->running) {
-            Buffer::DisplayBuffer buffer = this->gameInstances[this->currentGameIndex]->update();
-
-            this->displayInstances[this->currentDisplayIndex]->render(buffer);
+            this->displayInstances[this->currentDisplayIndex]->clear();
+            this->gameInstances[this->currentGameIndex]->update();
+            this->displayInstances[this->currentDisplayIndex]->render();
         }
     }
 }

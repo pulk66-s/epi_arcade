@@ -7,6 +7,6 @@
 class ArcaTek::Game::IGame {
 public:
     virtual ~IGame() = default;
-    virtual void init(Event::GameEventManager &eventManager) = 0;
-    virtual Buffer::DisplayBuffer update() = 0;
+    virtual void init(std::shared_ptr<Event::GameEventManager> eventManager, std::shared_ptr<Event::DisplayEventManager> displayEventManager) = 0;
+    virtual void update() = 0;
 };

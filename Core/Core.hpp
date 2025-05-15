@@ -18,8 +18,8 @@ class ArcaTek::Core {
         std::vector<std::shared_ptr<Display::IDisplay>> displayInstances = {};
         std::size_t currentGameIndex = 0;
         std::size_t currentDisplayIndex = 0;
-        Event::GameEventManager gameEventManager;
-        Event::DisplayEventManager displayEventManager;
+        std::shared_ptr<Event::GameEventManager> gameEventManager;
+        std::shared_ptr<Event::DisplayEventManager> displayEventManager;
         bool running = true;
 
         void setupHandlers();
