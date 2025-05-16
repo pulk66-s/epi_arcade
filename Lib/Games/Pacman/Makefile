@@ -1,6 +1,11 @@
 include ../../../config.mk
 
-SRC		:=	Pacman.cpp
+SRC		:=	Pacman.cpp	\
+			Map.cpp		\
+			Tile.cpp		\
+			PacGum.cpp		\
+			Wall.cpp
+
 OBJ		:= $(SRC:.cpp=.o)
 NAME	:= $(PACMAN_SO)
 
@@ -20,3 +25,5 @@ re: fclean all
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
+debug:
+	$(CXX) $(CXXFLAGS) -g -o $(NAME) $^ $(LDFLAGS)

@@ -2,6 +2,8 @@
 #include "Core/Buffer/Square.hpp"
 #include "Core/Event/Key.hpp"
 
+PacmanGame::PacmanGame(): map("./Lib/Games/Pacman/Map.txt") {}
+
 void PacmanGame::init(std::shared_ptr<ArcaTek::Event::GameEventManager> eventManager, std::shared_ptr<ArcaTek::Event::DisplayEventManager> displayEventManager) {
     this->eventManager = eventManager;
     this->displayEventManager = displayEventManager;
@@ -9,6 +11,7 @@ void PacmanGame::init(std::shared_ptr<ArcaTek::Event::GameEventManager> eventMan
 }
 
 void PacmanGame::update() {
+    this->map.display(this->displayEventManager);
     this->player.display(this->displayEventManager);
 }
 
